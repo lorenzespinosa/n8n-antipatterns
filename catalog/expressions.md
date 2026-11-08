@@ -16,7 +16,7 @@ Recurring mistakes in n8n expressions, dates, and Code node usage.
 
 **Sources:**
 - https://community.n8n.io/t/nodes-parameters-url-https-newsapi-org-v2-everything-apikey-setup1-first-json-apikey-q-json-output-clean-company-name-from-datetime-now-minus-days-setup1-first-json-newsage-tof/258049
-- https://docs.n8n.io/code/cookbook/luxon/
+- https://docs.n8n.io/build/work-with-data/handle-special-data-types/work-with-dates-and-times/
   Timezone resolution order: the workflow timezone setting, else the instance
   GENERIC_TIMEZONE, else the default; vanilla Date ignores both.
 

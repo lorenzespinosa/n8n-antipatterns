@@ -61,7 +61,7 @@ addresses after redirects.
 
 ## Documentation
 
-- https://docs.n8n.io/code/cookbook/luxon/
+- https://docs.n8n.io/build/work-with-data/handle-special-data-types/work-with-dates-and-times/
   How n8n resolves timezones for Luxon dates like $now: workflow setting first, then the instance timezone.
 
 - https://docs.n8n.io/build/flow-logic/handle-errors-gracefully
