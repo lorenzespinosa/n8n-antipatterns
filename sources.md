@@ -61,6 +61,9 @@ addresses after redirects.
 
 ## Documentation
 
+- https://docs.n8n.io/code/cookbook/luxon/
+  How n8n resolves timezones for Luxon dates like $now: workflow setting first, then the instance timezone.
+
 - https://docs.n8n.io/build/flow-logic/handle-errors-gracefully
   Error workflows, the Error Trigger, Stop And Error.
 - https://docs.n8n.io/build/flow-logic/loop
@@ -90,6 +93,14 @@ addresses after redirects.
 
 - https://blog.n8n.io/introducing-n8n-v3/
   Version 3.0 breaking changes, workflow versions, migration report, Function node retirement.
+
+## Tooling reference
+
+- https://github.com/lorenzespinosa/n8n-lint
+  The linter behind every "Caught by lint" line. Rule ids and thresholds cited
+  in entries (BP-02, BP-04, BP-05, BP-06) refer to the rule catalog as of
+  version 1.3.0; the README rule table is the authoritative list. Entries marked
+  "Caught by lint: none" mean no rule in that version covers the pattern.
 
 ## Consulted but not cited
 

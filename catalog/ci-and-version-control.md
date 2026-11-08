@@ -24,7 +24,7 @@ Recurring mistakes in how n8n workflows are backed up, versioned, and deployed.
 
 **Symptom:** Someone edits the running workflow in the editor. There is no diff, no second pair of eyes, and no rollback if the edit is wrong.
 
-**Why it hurts:** The editor writes straight to the live workflow. Teams have asked for git-based deployment since 2020, and it took years for workflow versioning to arrive, so plenty of instances still run this way. The published version and the draft version are separate things in current releases, and the CLI can export either.
+**Why it hurts:** On older n8n releases the editor wrote every save straight to the live workflow: no diff, no second pair of eyes, no rollback. Teams asked for git-based deployment for years before workflow versioning arrived, so un-upgraded instances still work this way. Current releases separate the draft from the published version, but the risk persists in a different shape: an editor who saves and activates without review still publishes unreviewed changes, just with one extra click.
 
 **Fix:** Keep production on published workflow versions and promote drafts deliberately. Export a specific version by id for review, or export the published version of every workflow with the CLI. Where instance features are not available, a scheduled CLI export into git gives you diffs and rollback after the fact.
 
@@ -39,7 +39,7 @@ Recurring mistakes in how n8n workflows are backed up, versioned, and deployed.
 
 **Symptom:** You deploy a template to a second instance or a second client. The webhook never activates. No error appears anywhere.
 
-**Why it hurts:** Webhook and form trigger nodes keep a fixed path or production URL from the template. The second deployment conflicts with the first one's path and fails silently, so a "deployment" that looks done is not live.
+**Why it hurts:** Webhook and form trigger nodes keep a fixed path or production URL from the template. When the second deployment lands on the same instance as the first (or behind a shared ingress that routes one host), the two compete for one path and the newer registration fails silently, so a "deployment" that looks done is not live. Genuinely separate instances with their own hostnames do not collide; the trap is reusing a template inside one environment family.
 
 **Fix:** Regenerate the webhook path for each deployment. Give each environment and each client its own path, credentials, and connection settings as part of the deploy checklist, not as an afterthought.
 

@@ -9,6 +9,11 @@
 #   3. Every external URL used in catalog entries also appears in
 #      sources.md.
 #
+# The script's own directory is captured at file scope: inside functions
+# zsh rebinds $0 to the function name, which made the default root resolve
+# to the repository's parent directory.
+SCRIPT_ROOT="${0:A:h:h}"
+
 # Usage:
 #   zsh scripts/check-links.zsh              # check the repo root
 #   zsh scripts/check-links.zsh --root DIR   # check another tree
@@ -193,7 +198,7 @@ USAGE
   fi
 
   if [[ -z "$root" ]]; then
-    root="${0:A:h:h}"
+    root="$SCRIPT_ROOT"
   fi
   if [[ ! -d "$root" ]]; then
     print -- "not a directory: $root" >&2

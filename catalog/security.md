@@ -22,7 +22,7 @@ Recurring mistakes that expose n8n workflows and instances.
 
 **Symptom:** Forged requests pass. The same request, captured once, replays later and the workflow treats it as new.
 
-**Why it hurts:** Authentication alone proves a caller holds a secret. It does not prove the payload came from the sender and was not sent twice. Payment and commerce senders retry on timeouts, so a workflow with no dedupe ships duplicate orders even without an attacker.
+**Why it hurts:** Basic and header authentication prove only that the caller holds a secret. They carry no provider-signed proof that the payload is intact and really came from that sender, and nothing stops a captured request from being replayed. Separately, payment and commerce senders retry on timeouts, so a workflow with no dedupe ships duplicate orders even without an attacker.
 
 **Fix:** Verify an HMAC signature computed over the raw payload with a per-sender secret. Reject timestamps outside a short window. Dedupe on the event id the sender provides at the very start of the workflow, so retries become no-ops.
 

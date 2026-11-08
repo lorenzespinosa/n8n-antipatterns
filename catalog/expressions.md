@@ -16,6 +16,9 @@ Recurring mistakes in n8n expressions, dates, and Code node usage.
 
 **Sources:**
 - https://community.n8n.io/t/nodes-parameters-url-https-newsapi-org-v2-everything-apikey-setup1-first-json-apikey-q-json-output-clean-company-name-from-datetime-now-minus-days-setup1-first-json-newsage-tof/258049
+- https://docs.n8n.io/code/cookbook/luxon/
+  Timezone resolution order: the workflow timezone setting, else the instance
+  GENERIC_TIMEZONE, else the default; vanilla Date ignores both.
 
 ### EXPR-2: Legacy expression syntax copied from old tutorials
 
@@ -38,7 +41,7 @@ Recurring mistakes in n8n expressions, dates, and Code node usage.
 
 **Why it hurts:** The Schedule Trigger follows the workflow timezone, else the instance timezone, which defaults to America/New_York on self-hosted instances when unset. JavaScript date code follows the process time zone. Setting one without the other leaves the two apart, and the mismatch only shows in production.
 
-**Fix:** Set the timezone explicitly on each workflow, which is the surgical fix when one instance serves several zones. On self-hosted, set both `GENERIC_TIMEZONE` and `TZ` to the same value. Prefer `$now` and the built-in date methods over raw JavaScript `Date` so values follow the instance zone.
+**Fix:** Set the timezone explicitly on each workflow, which is the surgical fix when one instance serves several zones. On self-hosted, set both `GENERIC_TIMEZONE` and `TZ` to the same value. Prefer `$now` and the built-in date methods over raw JavaScript `Date`. `$now` follows the workflow timezone when one is set in workflow settings, and falls back to the instance timezone otherwise, while a raw `Date` follows the process time zone and ignores both.
 
 **Caught by lint:** none
 
